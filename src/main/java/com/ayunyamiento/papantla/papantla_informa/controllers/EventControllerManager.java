@@ -1,11 +1,9 @@
 package com.ayunyamiento.papantla.papantla_informa.controllers;
 
 import com.ayunyamiento.papantla.papantla_informa.models.dtos.EventsDTO;
-import com.ayunyamiento.papantla.papantla_informa.repositories.EventsRepository;
 import com.ayunyamiento.papantla.papantla_informa.services.EventsServicesManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import jakarta.servlet.ServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

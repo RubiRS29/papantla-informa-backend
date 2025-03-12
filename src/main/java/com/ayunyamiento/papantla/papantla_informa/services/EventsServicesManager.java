@@ -4,9 +4,7 @@ import com.ayunyamiento.papantla.papantla_informa.models.EventsModel;
 import com.ayunyamiento.papantla.papantla_informa.models.dtos.EventsDTO;
 import com.ayunyamiento.papantla.papantla_informa.repositories.EventsRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,9 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import static com.ayunyamiento.papantla.papantla_informa.models.mappers.EventMapper.EVENT_MAPPER;
 
