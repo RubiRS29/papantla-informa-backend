@@ -30,7 +30,7 @@ public class EventsDTO {
     private LocalDateTime eventDate;
     private LocalDateTime endEventDate;
     private Tag eventTag;
-    private Priority priority = Priority.LOW;
+    private Priority priority = Priority.NONE;
     private EmployeeModel employee;
     private Boolean isPublic = true;
     private Boolean status = false;

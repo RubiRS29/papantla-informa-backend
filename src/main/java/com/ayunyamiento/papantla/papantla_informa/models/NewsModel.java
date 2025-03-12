@@ -36,9 +36,10 @@ public class NewsModel {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Tag newsTag;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Priority priority = Priority.LOW;
+    private Priority priority = Priority.NONE;
 
 
     @CreationTimestamp

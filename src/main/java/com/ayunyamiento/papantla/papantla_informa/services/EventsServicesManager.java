@@ -3,7 +3,10 @@ package com.ayunyamiento.papantla.papantla_informa.services;
 import com.ayunyamiento.papantla.papantla_informa.models.EventsModel;
 import com.ayunyamiento.papantla.papantla_informa.models.dtos.EventsDTO;
 import com.ayunyamiento.papantla.papantla_informa.repositories.EventsRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +16,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static com.ayunyamiento.papantla.papantla_informa.models.mappers.EventMapper.EVENT_MAPPER;
 
@@ -49,9 +54,41 @@ public class EventsServicesManager {
     public List<EventsDTO> getEventsOrderByPriority() throws IOException {
         LOGGER.info("Getting events by priority");
 
-        List<EventsModel> all = eventsRepository.findAll();
+        return eventsRepository.findAll().stream()
+                .map(EVENT_MAPPER::eventDTOToEventModel)
+                .sorted((e1, e2) -> e1.getPriority().compareTo(e2.getPriority()))
+                .toList();
 
-        return event;
+    }
+
+    public EventsDTO getEventById(Long id) {
+        LOGGER.info("Getting event with id: " + id);
+
+        return EVENT_MAPPER.eventDTOToEventModel(
+                eventsRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("Event Not Found")));
+    }
+
+    public EventsDTO updateEvent(EventsDTO eventsDTO) throws IOException {
+        LOGGER.info("Updating event");
+
+        EventsModel eventModel = eventsRepository
+                .findById(eventsDTO.getEventId())
+                    .orElseThrow(() -> new EntityNotFoundException("Event not found"));
+
+        return EVENT_MAPPER.eventDTOToEventModel(eventsRepository.save(eventModel));
+
+    }
+
+    public void deleteEvent(Long id) throws IOException {
+        LOGGER.info("Deactivate or Deleting event");
+
+        EventsModel eventModel = eventsRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Event not found"));
+
+        eventsRepository.delete(eventModel);
+
     }
 
     private String saveImage(MultipartFile file) throws IOException {

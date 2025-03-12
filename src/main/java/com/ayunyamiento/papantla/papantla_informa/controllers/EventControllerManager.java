@@ -5,6 +5,7 @@ import com.ayunyamiento.papantla.papantla_informa.repositories.EventsRepository;
 import com.ayunyamiento.papantla.papantla_informa.services.EventsServicesManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.servlet.ServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,21 @@ public class EventControllerManager {
 
     @GetMapping()
     public ResponseEntity<?> getEvents() throws IOException {
+        return ResponseEntity.ok(eventsServicesManager.getEventsOrderByPriority());
+    }
 
-        return ResponseEntity.ok(eventsServicesManager.createEvent(eventImage, eventsDTO));
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getEventById(@PathVariable Long id) throws IOException {
+        return ResponseEntity.ok(eventsServicesManager.getEventById(id));
+    }
+
+    @PutMapping
+    public ResponseEntity<?> updateEvent(@RequestBody EventsDTO eventsDTO) throws IOException {
+        return ResponseEntity.ok(eventsServicesManager.updateEvent(eventsDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteEventById(@PathVariable Long id) throws IOException {
+        return ResponseEntity.ok(eventsServicesManager.getEventById(id));
     }
 }
