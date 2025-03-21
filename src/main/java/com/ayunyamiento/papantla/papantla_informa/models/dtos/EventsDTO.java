@@ -3,6 +3,7 @@ package com.ayunyamiento.papantla.papantla_informa.models.dtos;
 import com.ayunyamiento.papantla.papantla_informa.models.EmployeeModel;
 import com.ayunyamiento.papantla.papantla_informa.models.Priority;
 import com.ayunyamiento.papantla.papantla_informa.models.Tag;
+import com.ayunyamiento.papantla.papantla_informa.models.TypeEvent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,9 @@ public class EventsDTO {
     private LocalDateTime endEventDate;
     private Tag eventTag;
     private Priority priority = Priority.NONE;
+    private TypeEvent type;
     private EmployeeModel employee;
+
     private Boolean isPublic = true;
     private Boolean status = false;
 

@@ -43,6 +43,10 @@ public class EventsModel {
     @Enumerated(EnumType.STRING)
     private Priority priority = Priority.LOW;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TypeEvent type = TypeEvent.EVENT;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private EmployeeModel employee;
 

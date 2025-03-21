@@ -1,49 +1,35 @@
-package com.ayunyamiento.papantla.papantla_informa.models;
+package com.ayunyamiento.papantla.papantla_informa.models.dtos;
 
+import com.ayunyamiento.papantla.papantla_informa.models.EmployeeModel;
+import com.ayunyamiento.papantla.papantla_informa.models.Priority;
+import com.ayunyamiento.papantla.papantla_informa.models.Tag;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalTime;
 
-@Entity(name = "news")
-@Getter
-@Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewsModel {
+@Data
+public class NewsDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long newsId;
-    @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
     private String description;
-    @ManyToOne(fetch = FetchType.LAZY)
     private EmployeeModel employeeCreator;
-
     private Boolean isPublic = true;
     private Boolean active = false;
-    @Column(nullable = true)
     private String imagePath;
-
     private Boolean needNotification = false;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private Tag newsTag;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private Priority priority = Priority.NONE;
 
-
-    @CreationTimestamp
     private LocalTime createdAt;
-    @UpdateTimestamp
     private LocalTime updatedAt;
 }

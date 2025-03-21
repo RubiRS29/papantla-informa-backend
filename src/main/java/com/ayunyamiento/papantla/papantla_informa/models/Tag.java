@@ -9,7 +9,7 @@ public enum Tag {
     SOCIAL_PROGRAMS("Programas Sociales"),
     PUBLIC_HEALTH ("Salud Pública"),
     SPORTS_ACTIVITIES_AND_WORKSHOP ("Deportes, Actividades y Talleres"),
-    EMERGENCY ("Avisos de Emergencias"),
+    EMERGENCY ("Aviso de Emergencia"),
     PUBLIC_SERVICES ("Servicios Públicos");
 
     Tag(String tagTranslate) {
